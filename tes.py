@@ -9,17 +9,6 @@ def file_not_found(client_socket,filename):
     response_header = "HTTP/1.1 404 Not Found\r\nContent-Length: 0\r\n\r\n"
     client_socket.send(response_header.encode())
     print(f"File {filename} tidak ditemukan pada directory")
-    
-def create_404_response():
-    filepath = "404page.html"
-    content_type = 'text/html' #if filepath.endswith('.html') else 'text/css'
-    content = get_file_content(filepath)
-    response = "HTTP/1.1 404 Not Found\r\n"
-    response += "Content-Type: {}\r\n".format(content_type)
-    response += "Content-Length: {}\r\n".format(len(content))
-    response += "\r\n"
-    response += content.decode('utf-8')
-    return response
 
 def Serv(client_socket, filename):
     try:
@@ -39,8 +28,9 @@ def get_http_response(request):
         response_header = f"HTTP/1.1 200 OK\r\nContent-Length: {len(content)}\r\n\r\n"
         response = response_header.encode() + content
     else:
-        response_header = "HTTP/1.1 404 Not Found\r\nContent-Length: 0\r\n\r\n"
-        response = create_404_response()
+        content = get_file_content("404page.html")
+        response_header = f"HTTP/1.1 404 Not Found\r\nContent-Length: {len(content)}\r\n\r\n"
+        response = response_header.encode() + content
         print(f"file {filename} tidak ditemukan di directory")
     return response
 
@@ -51,7 +41,7 @@ def request_handler(client_socket,address):
         print("Permintaan File Berhasil dibuka")
         print("Method: ", method)
         print("Path: ", path)
-        print('Protocol: ', protocol)
+        print("Protocol: ", protocol)
 
         response = get_http_response(request)
         client_socket.sendall(response)
