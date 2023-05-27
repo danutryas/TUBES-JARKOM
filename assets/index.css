@@ -19,19 +19,21 @@ section {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #9DB2BF;
+  background-color: #9db2bf;
   grid-column: span 3;
   font-size: 1rem;
   padding: 5rem;
-  box-shadow: 0.7rem 0.7rem 0 #27374D;
-  border: 4px solid #526D82;
+  box-shadow: 0.7rem 0.7rem 0 #27374d;
+  border: 4px solid #526d82;
   gap: 1.5rem;
 }
-.card p {
+.card p,
+.card a {
   line-height: 2rem;
   display: none;
 }
-.card.active p {
+.card.active p,
+.card.active a {
   display: block;
 }
 .card.active {
