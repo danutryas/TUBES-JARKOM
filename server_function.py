@@ -34,7 +34,6 @@ def get_http_response(request):
     request_part = request.split()
     method = request_part[0]
     filename = request_part[1][1:]
-    response = file_serve(filename)
     if os.path.isfile(filename):  # mengecek apakah file yang diminta terdapat pada direktori
         response = file_serve(filename)
     else:
